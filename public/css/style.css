@@ -1,0 +1,13 @@
+/* Estilo para preguntas */
+#pregunta {
+    font-family: 'Arial', sans-serif; /* Cambia la fuente según tu preferencia */
+    font-size: 16px; /* Tamaño de fuente para preguntas */
+    font-weight: bold; /* Otras propiedades de estilo según tus preferencias */
+}
+
+/* Estilo para respuestas */
+.respuesta {
+    font-family: 'Times New Roman', serif; /* Cambia la fuente según tu preferencia */
+    font-size: 14px; /* Tamaño de fuente para respuestas */
+    font-style: italic; /* Otras propiedades de estilo según tus preferencias */
+}
