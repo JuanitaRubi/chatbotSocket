@@ -4,7 +4,8 @@ const path = require("path");
 const {Server}=require("socket.io");
 const cors=require("cors");
 const socket = require("./sockets/socket");
-
+const {conectarMongo} = require("./bd/conexion");
+conectarMongo();
 
 const app=express();
 const httpServer=http.createServer(app);
