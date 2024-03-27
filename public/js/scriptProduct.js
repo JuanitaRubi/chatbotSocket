@@ -1,6 +1,6 @@
 const socket = io();
 
-var mensajeDiv=document.getElementById("mensaje");
+var mensajeHTML=document.getElementById("mensajeHTML");
 var datos=document.getElementById("datos");
 
 //MOSTRAR PRODUCTOS DE MONGO
@@ -40,9 +40,9 @@ var producto = {
 socket.emit("clienteGuardarProducto", producto);
 socket.on("servidorProductoGuardado", (mensaje)=>{
     console.log(mensaje);
-    mensajeDiv.innerHTML=mensaje;
+    mensajeHTML.innerHTML=mensaje;
     setTimeout(()=>{
-        mensajeDiv.innerHTML="";
+        mensajeHTML.innerHTML="";
     }, 3000);
 });
 console.log("Recibiendo datos... ");

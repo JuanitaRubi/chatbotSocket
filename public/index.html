@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto con sockets</title>
+    <script src="/socket.io/socket.io.js"></script>
+
    <!-- <script src="http://localhost:3000/socket.io/socket.io.min.js" defer></script> -->
    <script src="https://chatbotsocket.onrender.com/socket.io/socket.io.min.js" defer></script>
     <script src="js/script.js" defer></script>
@@ -32,22 +34,23 @@
                 <form action="" id="enviarDatos">
                     <div class="card">
                         <div class="card-header">
-                            <h1>Nuevo usuario</h1>
+                            <h1 id="txtNuevousuario">Nuevo usuario</h1>
                         </div>
                         <div class="card-body">
+                            <input class="form-control mb-3" type="text" id="id" placeholder="id" readonly disabled>
                             <input class="form-control mb-3" type="text" name="nombre" id="nombre" placeholder="Nombre" autofocus>
                             <input class="form-control mb-3" type="text" name="usuario" id="usuario" placeholder="Usuario">
                             <input class="form-control mb-3" type="text" name="password" id="password" placeholder="Password">
                         </div>
                         <div class="card-footer">
-                            <button class="form-control btn btn-primary mb-3" type="submit">Guardar Usuario</button>
+                            <button id="txtGuardarUsuario" class="form-control btn btn-primary mb-3" type="submit">Guardar Usuario</button>
                             <button class="form-control btn btn-secondary" type="reset">Borrar Datos</button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="col-8">
-                <div class="text-danger fs-3" id="mensaje"></div>
+                <div class="text-danger fs-3" id="mensajeHTML"></div>
                 <table class="table hoover">
                     <thead>
                         <tr>

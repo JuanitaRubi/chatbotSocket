@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 require("dotenv").config();
-const mongodb_password=process.env.MONGO_ATLAS;  //pw en el codigo del prof es password
+const mongodb_password=process.env.MONGO_ATLAS; 
 async function conectarMongo(){
     const mongoDB=mongodb_password;
     mongoose.set("strictQuery",true);

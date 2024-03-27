@@ -1,6 +1,6 @@
 const socket= io();
 
-var mensajeDiv=document.getElementById("mensaje");
+var mensajeHTML=document.getElementById("mensajeHTML");
 var datos = document.getElementById("datos")
 
 
@@ -16,8 +16,8 @@ socket.on("servidorEnviarUsuarios", (usuarios)=>{
              <td>${usuario.usuario}</td>
              <td>${usuario.password}</td>
              <td>
-                <a href="# onclick="editarUsuario('${usuario._id}')" class="btn btn-outline-primary">Editar</a> / 
-                <a href="# onclick="borrarUsuario('${usuario._id}')" class="btn btn-outline-primary>Borrar</a>
+                <a href="#" onclick="editarUsuario('${usuario._id}')" class="btn btn-outline-primary">Editar</a> / 
+                <a href="#" onclick="borrarUsuario('${usuario._id}')" class="btn btn-outline-primary">Borrar</a>
              </td>
         </tr>
             `;
@@ -28,22 +28,24 @@ socket.on("servidorEnviarUsuarios", (usuarios)=>{
 
 //GUARDAR DATOS A MONGODB
 
+var enviarDatos=document.getElementById("enviarDatos");
 enviarDatos.addEventListener("submit", (e)=>{
     e.preventDefault();
 
     //RECIBIR DATOS DEL FORMULARIO
     var usuario={ 
+    id:document.getElementById("id").value,
     nombre:document.getElementById("nombre").value,
-    usuario:document.getElementById("datos").value,
-    password:document.getElementById("usuario").value,
+    usuario:document.getElementById("usuario").value,
+    password:document.getElementById("password").value,
 
     }
     socket.emit("ClienteGuardarUsuario",usuario);
     socket.on("servidorUsuarioGuardado", (mensaje)=>{
         console.log(mensaje);
-        mensajeHtml.innerHTML=mensaje;
+        mensajeHTML.innerHTML=mensaje;
         setTimeout(()=>{
-            mensajeHtml.innerHTML="";
+            mensajeHTML.innerHTML="";
         },3000);
     });
     console.log("Recibiendo datos...");
@@ -59,11 +61,23 @@ enviarDatos.addEventListener("submit", (e)=>{
 //MODIFICAR UN REGISTRO
 function editarUsuario(id){
     console.log(id);
+    socket.emit("clienteObtenerUsuarioPorID", id);
+
 }
+socket.on("servidorObtenerUsuarioPorID",(usuario)=>{
+    console.log(usuario);
+    document.getElementById("id").value=usuario._id;
+    document.getElementById("nombre").value=usuario.nombre;
+    document.getElementById("usuario").value=usuario.usuario;
+    document.getElementById("password").value=usuario.password;
+    document.getElementById("txtNuevoUsiario").innerHTML="Editar usuario";
+    document.getElementById("txtGuardadrUsuario").innerHTML="Guardar cambios";
+});
 
 //ELIMINAR UN REGISTRO DE MONGO
 function borrarUsuario(id){
     console.log(id);
+    socket.emit("clienteBorrarUsuario",id);
 }
 
 

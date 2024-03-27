@@ -12,12 +12,19 @@ function socket(io){
         }
 
         //GUARDAR USUARIO
-        socket.on("clienteGuardarUsuario", async(usuario)=>{
-
+        socket.on("ClienteGuardarUsuario", async(usuario)=>{
+            console.log("Estas en guardar");
             try{
-                await new Usuario(usuario).save();
-                io.emit("servidorUsuarioGuardado", "Usuario guardado");
-                console.log("usuario guardado");
+                if(usuario.id==""){
+                    await new Usuario(usuario).save();
+                    io.emit("servidorUsuarioGuardado", "Usuario guardado");
+                }
+                else{
+                    await Usuario.findByIdAndUpdate(usuario.id, usuario);
+                    io.emit("servidorUsuarioGuardado","Usuario modificado");
+                }
+                mostrarUsuarios();
+                    
             }
             catch(err){
                 console.log("Error al registrar usuario"+err);
@@ -41,6 +48,19 @@ function socket(io){
                 console.log("Error al guardar producto" + err);
             }
         });
+
+        //OBTENER USUARIO POR ID
+        socket.on("clienteObtenerUsuarioPorID", async(id)=>{
+        const usuario= await Usuario.findById(id);
+        io.emit("servidorObtenerUsuarioPorID", usuario);
+        });
+
+        //BORRAR USUARIO POR ID
+        socket.on("clienteBorrarUsuario",async (id)=>{
+            await usuario.findByIdAndDelete(id);
+            io.emit("servidorUsuarioGuardado", "Usuario borrado");
+            mostrarUsuarios();
+        });
         
 
 
@@ -48,5 +68,5 @@ function socket(io){
 
     
     }) //FIN IO.ON
-    };
+};
 module.exports=socket;
