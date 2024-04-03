@@ -13,7 +13,7 @@ function socket(io){
 
         //GUARDAR USUARIO
         socket.on("ClienteGuardarUsuario", async(usuario)=>{
-            console.log("Estas en guardar");
+            //console.log("Estas en guardar");
             try{
                 if(usuario.id==""){
                     await new Usuario(usuario).save();
@@ -56,8 +56,8 @@ function socket(io){
         });
 
         //BORRAR USUARIO POR ID
-        socket.on("clienteBorrarUsuario",async (id)=>{
-            await usuario.findByIdAndDelete(id);
+        socket.on("clienteBorrarUsuario", async(id)=>{
+            await Usuario.findByIdAndDelete(id);
             io.emit("servidorUsuarioGuardado", "Usuario borrado");
             mostrarUsuarios();
         });

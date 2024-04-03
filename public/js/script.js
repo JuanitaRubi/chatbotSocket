@@ -16,8 +16,8 @@ socket.on("servidorEnviarUsuarios", (usuarios)=>{
              <td>${usuario.usuario}</td>
              <td>${usuario.password}</td>
              <td>
-                <a href="#" onclick="editarUsuario('${usuario._id}')" class="btn btn-outline-primary">Editar</a> / 
-                <a href="#" onclick="borrarUsuario('${usuario._id}')" class="btn btn-outline-primary">Borrar</a>
+                <a href="#" onclick="editarUsuario('${usuario._id}')">Editar</a> / 
+                <a href="#" onclick="borrarUsuario('${usuario._id}')">Borrar</a>
              </td>
         </tr>
             `;

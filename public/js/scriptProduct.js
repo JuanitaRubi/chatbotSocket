@@ -16,8 +16,8 @@ socket.on("servidorEnviarProductos", (productos)=>{
             <td>${(producto.descripcion)}</td>
             <td>${(producto.cantidad)}</td>
             <td>
-                <a href="#" onclick="editarproducto('${producto._id}')" class="btn btn-outline-primary">Editar</a> /
-                <a href="#" onclick="borrarproducto('${producto._id}')" class="btn btn-outline-primary">Borrar</a>
+                <a href="#" onclick="editarproducto('${producto._id}')">Editar</a> /
+                <a href="#" onclick="borrarproducto('${producto._id}')">Borrar</a>
             </td>
         </tr>
         `;
