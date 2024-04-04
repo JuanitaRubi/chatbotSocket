@@ -33,10 +33,11 @@ enviarDatos.addEventListener("submit", (e)=>{
     e.preventDefault();
 //RECIBE DATOS
 var producto = {
+    id:document.getElementById("id").value,
     nombre: document.getElementById("nombre").value,
     descripcion: document.getElementById("descripcion").value,
     cantidad: document.getElementById("cantidad").value,
-};
+}
 socket.emit("clienteGuardarProducto", producto);
 socket.on("servidorProductoGuardado", (mensaje)=>{
     console.log(mensaje);
@@ -51,9 +52,6 @@ console.log("Recibiendo datos... ");
     document.getElementById("descripcion").value="";
     document.getElementById("cantidad").value="";
     document.getElementById("nombre").focus();
-    
-
-
 });
 
 
@@ -61,10 +59,23 @@ console.log("Recibiendo datos... ");
 
 function editarproducto(id){
     console.log(id);
+    socket.emit("cleinteObtenerProductoPorID", id);
+
 }
+socket.on("servidorObetenerProductoPorID", (producto)=>{
+    console.log(producto);
+    document.getElementById("id").value=producto._id;
+    document.getElementById("nombre").value=producto.nombre;
+    document.getElementById("descripcion").value=producto.descripcion;
+    document.getElementById("cantidad").value=producto.cantidad;
+    document.getElementById("txtNuevoProducto").innerHTML="Editar producto";
+    document.getElementById("txtGuardarProducto").innerHTML="Guardar cambios";
+
+});
 
 //BORRAR PRODUCTO MONGO
 
 function borrarproducto(id){
     console.log(id);
+    socket.emit("clienteBorrarProducto",id);
 }

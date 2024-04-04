@@ -18,4 +18,4 @@ const producSchema = new mongoose.Schema({
         default: true,
     },
 });
-module.exports = mongoose.model('producto', producSchema);
+module.exports = new mongoose.model("producto", producSchema);
